@@ -10,13 +10,13 @@ class Carrera():
         '''Fijamos la anchura de la pista en 540 pixels (suficiente para poder albergar cómodamente hasta 8 calles para otras tantas tortugas corredoras).'''
         self.__ancho = 540
 
-        '''Preguntaremos si se desea introducir el largo de la pista (distancia en pixels, de mínimo 550 y de máximo 1550) que recorrerán las tortugas. Si no se hace se fijará en 1200.'''
-        pideValor = ToolBox_Carrera.solIntOrN("Distancia establecida en 1200 pixels.\nSi te parece bien pulsa N.\nSi deseas cambiarla introduce un nuevo valor: ", minimo = 550, maximo = 1550)
+        '''Preguntaremos si se desea introducir el largo de la pista (distancia en pixels, de mínimo 400 y de máximo 1600) que recorrerán las tortugas. Si no se hace se fijará en 1000.'''
+        pideValor = ToolBox_Carrera.solIntOrN("Distancia establecida en 1000 pixels.\nSi te parece bien pulsa N.\nSi deseas cambiarla introduce un nuevo valor: ", minimo = 400, maximo = 1600)
         
         if pideValor == "N":
             self.__largo = 1200
         else:
-            self.__largo = pideValor
+            self.__largo = 200 + pideValor
         
         '''Fijamos un mínimo de 2 corredoras, pero preguntaremos si se desean más (hasta un máximo de ocho).'''
         pideValor = ToolBox_Carrera.solIntOrN("\nTenemos 2 corredoras.\nSi te parece bien pulsa N.\nSi no, dinos cuantas quieres ver correr: ", minimo = 2, maximo= 8)
@@ -87,17 +87,30 @@ class Carrera():
         dondeY = self.__calle - (self.__ancho / 2)
         for i in range(self.__tortus - 1):
             '''En cada iteración, colocamos la tortuga en su posición Y calculada y en una posición X diez pixels por delante de la linea de salida.'''
-            pintaRayas.setpos(self.__salida - 10, dondeY)
+            pintaRayas.setpos(self.__salida - 15, dondeY)
+            pintaRayas.pendown()
+            pintaRayas.forward(15)
+            pintaRayas.penup()
             
             '''Pintamos una línea discontínua, controlando que la posición X de la tortuga no sobrepase diez pixels tras la línea de meta.'''
-            while pintaRayas.xcor() < self.__meta + 10:
-                '''Bajamos el lápiz y pintamos una línea de 45 pixels, haciendo avanzar a la tortuga.'''
+            while pintaRayas.xcor() < self.__meta:                
+                '''Bajamos el lápiz y pintamos 60 pixels si podemos... si no, los que se puedan.'''
                 pintaRayas.pendown()
-                pintaRayas.forward(45)
+                if (self.__meta - pintaRayas.xcor()) >= 60:
+                    pintaRayas.forward(60)
+                else:
+                    pintaRayas.forward(self.__meta - pintaRayas.xcor())
                 
-                '''Levantamos el lápiz y avanzamos la tortuga 20 pixels.'''
+                '''Levantamos el lápiz y avanzamos 40 pixels si podemos, si no, los que se puedan.'''
                 pintaRayas.penup()
-                pintaRayas.forward(20)
+                if (self.__meta - pintaRayas.xcor()) >= 40:
+                    pintaRayas.forward(40)
+                else:
+                    pintaRayas.forward(self.__meta - pintaRayas.xcor())
+                        
+            pintaRayas.pendown()
+            pintaRayas.forward(15)
+            pintaRayas.penup()
             
             '''Finalizamos la iteración calculando la siguiente posición Y para pintar un nueva línea de separación de calles.'''
             dondeY += self.__calle
