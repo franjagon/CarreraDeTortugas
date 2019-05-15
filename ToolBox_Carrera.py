@@ -24,8 +24,7 @@ def solIntOrN(mensaje, **params):
         
         '''Si recibe una N, la devuelve, ya que será la condición de salida.
            Si la validación es incorrecta (recibe None), da un mensaje de error.
-           Si recibe un entero y tiene un limite mínimo parametrizado, comprueba que es mayor (si no lo es lo descarta).
-           Si recibe un entero y tiene un limite máximo parametrizado, comprueba que es menr (si no lo es lo descarta).'''
+           Si recibe un entero y tiene un limite mínimo/máximo parametrizado, comprueba que es mayor/menor (si no lo es lo descarta).'''
         if num == "N":
             return num
         elif num == None:
