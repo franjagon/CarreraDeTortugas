@@ -1,10 +1,10 @@
-'''Esta función validará que la cantidad recibida (como una cadena) pueda cargarse en un tipo int. Sólo valdrán números positivos.
-   Si la validación es correcta, devolverá la cantidad como un número, en caso contrario devolverá None.
-   Si se introduce una N la devuelve ya que será la condición de no validar nada.'''
+'''Esta función validará que la cantidad recibida (como una cadena) pueda cargarse en un tipo int. Sólo valdrán números positivos.'''
 def valIntOrN(strNum):
+    '''Si recibe una N, la devuelve mayúscula, ya que será la condición para no validar nada.'''
     if strNum.upper() == "N":
         return strNum.upper()
     
+    '''Si la validación es correcta, devolverá una cantidad como un número, en caso contrario devolverá None.'''
     try:
         num = int(strNum)
         if num <= 0:
@@ -14,10 +14,18 @@ def valIntOrN(strNum):
 
     return num
 
+'''Esta función solicitará la validación de una cantidad requerida. Podrá recibir un valor límite mínimo y/o un valor límite máximo.'''
 def solIntOrN(mensaje, **params):    
     num = None
+    
+    '''La función solicitará una cantidad para ser validada mientras no reciba un valor procesable como válido, que devolverá.'''
     while num == None:
         num = valIntOrN(input(mensaje))
+        
+        '''Si recibe una N, la devuelve, ya que será la condición de salida.
+           Si la validación es incorrecta (recibe None), da un mensaje de error.
+           Si recibe un entero y tiene un limite mínimo parametrizado, comprueba que es mayor (si no lo es lo descarta).
+           Si recibe un entero y tiene un limite máximo parametrizado, comprueba que es menr (si no lo es lo descarta).'''
         if num == "N":
             return num
         elif num == None:
