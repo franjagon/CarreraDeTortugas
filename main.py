@@ -86,13 +86,13 @@ class Carrera():
         '''Calculamos la primera posición del eje Y e iteramos para pintar un numero de líneas demarcadoras igual al numero de corredoras menos uno.'''
         dondeY = self.__calle - (self.__ancho / 2)
         for i in range(self.__tortus - 1):
-            '''En cada iteración, colocamos la tortuga en su posición Y calculada y en una posición X diez pixels por delante de la linea de salida.'''
+            '''En cada iteración, colocamos la tortuga en su posición Y calculada y en una posición X anticipada quince pixels a la línea de salida y pintamos esos quince pixels.'''
             pintaRayas.setpos(self.__salida - 15, dondeY)
             pintaRayas.pendown()
             pintaRayas.forward(15)
             pintaRayas.penup()
             
-            '''Pintamos una línea discontínua, controlando que la posición X de la tortuga no sobrepase diez pixels tras la línea de meta.'''
+            '''Pintamos una línea discontínua, controlando que la posición X de la tortuga no sobrepase la línea de meta.'''
             while pintaRayas.xcor() < self.__meta:                
                 '''Bajamos el lápiz y pintamos 60 pixels si podemos... si no, los que se puedan.'''
                 pintaRayas.pendown()
@@ -108,6 +108,7 @@ class Carrera():
                 else:
                     pintaRayas.forward(self.__meta - pintaRayas.xcor())
                         
+            '''Tras completar la línea discontínua, pintamos quince pixels tras la línea de meta.'''
             pintaRayas.pendown()
             pintaRayas.forward(15)
             pintaRayas.penup()
