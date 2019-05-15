@@ -18,7 +18,7 @@ def valIntOrN(strNum):
 def solIntOrN(mensaje, **params):    
     num = None
     
-    '''La función solicitará una cantidad para ser validada mientras no reciba un valor procesable como válido, que devolverá.'''
+    '''La función solicitará una cantidad para ser validada mientras no reciba un valor que considere válido (para devolverlo).'''
     while num == None:
         num = valIntOrN(input(mensaje))
         
