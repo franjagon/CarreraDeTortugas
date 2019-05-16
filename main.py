@@ -5,7 +5,7 @@ import ToolBox_Carrera
 
 '''Nuestra clase principal (objeto) será la carrera propiamente dicha.'''
 class Carrera():
-    '''La clase constructor contendrá los atributos (todos privados) de los cuales podremos setear la distancia de la carrera, el número de tortugas corredoras y el máximo avance por turno.'''
+    '''El método constructor contendrá los atributos (todos privados) de los cuales podremos setear la distancia de la carrera y el número de tortugas corredoras.'''
     def __init__(self):
         '''Fijamos la anchura de la pista en 540 pixels (suficiente para poder albergar cómodamente hasta 8 calles para otras tantas tortugas corredoras).'''
         self.__ancho = 540
@@ -40,7 +40,7 @@ class Carrera():
         self.__corredoras = []
         self.__creaTortus()
 
-    '''Esta clase privada (sólo invocada desde el constructor) se ocupará de dibujar la pista de carreras.'''
+    '''Este método privado (sólo invocado desde el constructor) se ocupará de generar la pista de carreras.'''
     def __pista(self):
         '''Para la pista se generará una instancia Screen -de la clase turtle- que se parametrizará con un color de fondo y las medidas de largo y ancho establecidas.'''
         self.__pantalla = turtle.Screen()
@@ -50,7 +50,7 @@ class Carrera():
         '''Pintamos las líneas demarcadoras de la pista.'''
         self.__pintaRayas()
 
-    '''Esta clase privada (sólo invocada desde el constructor) se ocupará de dibujar las líneas, de salida/meta y las separaciones de las calles, de la pista de carreras.'''
+    '''Este método privado se ocupará de dibujar las líneas, de salida/meta y las separaciones de las calles, de la pista de carreras.'''
     def __pintaRayas(self):
         '''Para dibujar, generamos una tortuga, que es una instancia Turtle -de la clase turtle-.''' 
         pintaRayas = turtle.Turtle()
@@ -83,7 +83,7 @@ class Carrera():
         pintaRayas.right(90)
         
         '''Para pintar las líneas de separación de las calles de la pista de carreras tendremos que ir colocándola de forma consecutiva a intervalos equidistantes por la anchura de la pista.'''
-        '''Calculamos la primera posición del eje Y e iteramos para pintar un numero de líneas demarcadoras igual al numero de corredoras menos uno.'''
+        '''Calculamos la primera posición del eje Y e iteramos para pintar un número de líneas demarcadoras igual al número de corredoras menos uno.'''
         dondeY = self.__calle - (self.__ancho / 2)
         for i in range(self.__tortus - 1):
             '''En cada iteración, colocamos la tortuga en su posición Y calculada y en una posición X anticipada quince pixels a la línea de salida y pintamos esos quince pixels.'''
@@ -113,10 +113,10 @@ class Carrera():
             pintaRayas.forward(15)
             pintaRayas.penup()
             
-            '''Finalizamos la iteración calculando la siguiente posición Y para pintar un nueva línea de separación de calles.'''
+            '''Finalizamos la iteración calculando la siguiente posición Y, para pintar un nueva línea de separación de calles.'''
             dondeY += self.__calle
 
-    '''Esta clase privada (sólo invocada desde el constructor) se ocupará de crear las tortugas corredoras.'''   
+    '''Este método privado (sólo invocado desde el constructor) se ocupará de crear las tortugas corredoras.'''   
     def __creaTortus(self):
         '''Fijamos una tupla de ocho colores, para un máximo de ocho tortugas corredoras.'''
         self.__colores = ("red", "green", "blue", "orange", "purple", "gray", "yellow", "black")
@@ -146,7 +146,7 @@ class Carrera():
             '''Calculamos la posición Y inicial para la siguiente tortuga corredora.'''
             ini += 2
 
-    '''Esta clase será la que inicie la carrera y dilucide la tortuga ganadora.'''
+    '''Este método será el que inicie y desarrolle la carrera para terminar con la tortuga ganadora.'''
     def competir(self):        
         '''Fijamos el máximo de avance en función del largo establecido para la pista.'''      
         maxAvance = round(self.__largo / 150, 0)
@@ -168,6 +168,7 @@ class Carrera():
                     '''Forzamos la salida del bucle de iteración de las corredoras para que (en este mismo turno) ninguna otra pueda rebasar la meta.'''
                     break
 
+'''Nuestra ejecución como programa principal instanciará un objeto carrera e invocará su metodo competir para que se lance dicha carrera.'''
 if __name__ == "__main__":
     miCarrera = Carrera()
     miCarrera.competir()
